@@ -2,14 +2,17 @@ package com.renovSolution.renov.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity(name="AdresseUtilisateur")
 @Table(name ="adresse_utilisateur")
 
-public class AdresseUtilisateur {
-
+public class AdresseUtilisateur implements Serializable {
+    @JsonIgnore
     @EmbeddedId
     private AdresseUtilisateurId id;
 
@@ -32,6 +35,7 @@ public class AdresseUtilisateur {
                     name="adresseUtilisateur_adresse_fk"
             )
     )
+   // @JsonBackReference
     private Adresse adresse ;
 
 

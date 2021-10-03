@@ -1,13 +1,11 @@
 package com.renovSolution.renov;
 
 import com.renovSolution.renov.model.*;
-import com.renovSolution.renov.repo.AdresseRepo;
-import com.renovSolution.renov.repo.ClientRepo;
+import com.renovSolution.renov.repo.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import com.renovSolution.renov.repo.UtilisateurRepo;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -41,7 +39,8 @@ public class RenovApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(UtilisateurRepo utilisateurRepo, AdresseRepo adresseRepo,ClientRepo clientRepo) {
+	CommandLineRunner commandLineRunner(UtilisateurRepo utilisateurRepo, AdresseRepo adresseRepo, ClientRepo clientRepo,
+										IndividuRepo individuRepo, OffreServiceRepo offreServiceRepo) {
 
 		return args -> {
 
@@ -145,6 +144,83 @@ public class RenovApplication {
 			client.addAppelDOffre(ao2);
 			clientRepo.save(client);
 
+
+ // créer un contracteur individu
+			Individus indiv1 = new Individus(
+					"Alain",
+					"Alain",
+					LocalDate.now(),
+					"Individu",
+					0,
+					0,
+					"Peinture",
+					"555-555-5555",
+					"alain@bell.net",
+					"Flouflou",
+					"Alain" ,
+					"Numero2021AlainPeintre"
+			);
+// créer offre de service
+
+			OffreService os = new OffreService(LocalDate.now(),LocalDate.now().plusMonths(2),"crée",500);
+			OffreService os1 = new OffreService(LocalDate.now(),LocalDate.now().plusMonths(1),"crée",100);
+			// creer deux materiaux
+			Materiaux mat1 = new Materiaux("peinture Alpha",45);
+			Materiaux mat2 = new Materiaux("peinture Beta",33);
+
+			// creer les ID pour la table intermediaire
+			OdsMateriauxId odsMatId1 = new OdsMateriauxId(os.getId(), mat1.getId());
+			OdsMateriauxId odsMatId2 = new OdsMateriauxId(os.getId(), mat2.getId());
+
+
+			OdsMateriauxId odsMatId3 = new OdsMateriauxId(os1.getId(), mat1.getId());
+// creer les objets Ods-Materaux
+
+
+			OdsMateriaux odsMat1 = new OdsMateriaux(odsMatId1,os,mat1,5,46);
+			OdsMateriaux odsMat2 = new OdsMateriaux(odsMatId2,os,mat2,3,33);
+
+
+
+			OdsMateriaux odsMat3 = new OdsMateriaux(odsMatId3,os1,mat1,7,77);
+
+
+			// ajouter les OdsMateriaux à la liste dans l'offre de service
+
+			os.addMateriauToOffreService(odsMat1);
+			os.addMateriauToOffreService(odsMat2);
+
+			os1.addMateriauToOffreService(odsMat3);
+
+			// creer deux main d'ouvre
+			MainOeuvre mdo1 = new MainOeuvre("peintre",3,35);
+			MainOeuvre mdo2 = new MainOeuvre("plombier",2,40);
+
+			// creer les deux cle composées
+			OdsMainOeuvreId odsMdoId1 = new OdsMainOeuvreId(os.getId(),mdo1.getId());
+			OdsMainOeuvreId odsMdoId2 = new OdsMainOeuvreId(os.getId(),mdo2.getId());
+
+// créer les objets de la table relation
+			OdsMainOeuvre odsMdo1 = new OdsMainOeuvre(odsMdoId1,os,mdo1,10,33);
+			OdsMainOeuvre odsMdo2 = new OdsMainOeuvre(odsMdoId2,os,mdo2,8,42);
+
+			// ajouter les OdsMinOeuvre à la liste dans l'offre de service
+			os.addMainOeuvreToOffreService(odsMdo1);
+			os.addMainOeuvreToOffreService(odsMdo2);
+
+// rajouter l'offre de service au contracteur qui l'a générée
+			indiv1.addOffreService(os);
+           indiv1.addOffreService(os1);
+
+			// rajouter l'offre de service à l'appel d'offre auquel il répond
+			ao.addOffreService(os);
+
+			ao.addOffreService(os1);
+
+			individuRepo.save(indiv1);
+
+
+
 			clientRepo.findById(1L).ifPresent(
 					c-> {
 						System.out.println("Listes des Appels d'offres: ");
@@ -153,7 +229,14 @@ public class RenovApplication {
 							System.out.println(uneAO);
 						});
 					});
-
+			/*List<OffreService>  offreServiceList = offreServiceRepo.findOffreServicesByContracteur(indiv1) ;
+			offreServiceList.forEach(uneOS->{
+				System.out.println("id de offre de service   "+uneOS.getId()+" montant "+uneOS.getMontant());
+			});*/
+			List<OffreService>  offreServiceList = offreServiceRepo.findOffreServicesByContracteurId(indiv1.getId()) ;
+			offreServiceList.forEach(uneOS->{
+				System.out.println("id de offre de service   "+uneOS.getId()+" montant "+uneOS.getMontant()+" NOM CONTRACTEUR "+uneOS.getContracteur().getUsername());
+			});
 
 		//	System.out.println(client);
 

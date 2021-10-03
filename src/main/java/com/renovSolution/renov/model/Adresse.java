@@ -1,9 +1,13 @@
 package com.renovSolution.renov.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +15,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name="Adresse")
 @Table(name="adresse")
-public class Adresse {
+public class Adresse implements Serializable {
 
     @Id
     @SequenceGenerator(
@@ -74,13 +78,14 @@ public class Adresse {
     private String codePostal;
 
 
-    @OneToMany(
+    /*@OneToMany(
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
             mappedBy = "adresse"
     )
     @JsonManagedReference
+   // @JsonIgnore
     private List<AdresseUtilisateur> adressesUtilisateurs = new ArrayList<>();
-
+*/
     public Adresse() {
     }
 
@@ -158,11 +163,12 @@ public class Adresse {
     public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
-
+/*
     public List<AdresseUtilisateur> getAdressesUtilisateurs() {
         return adressesUtilisateurs;
     }
-
+*/
+   /*
     public void addAdresseToUtilisateur(AdresseUtilisateur adresseUtilisateur){
         if(!adressesUtilisateurs.contains(adresseUtilisateur)){
             adressesUtilisateurs.add(adresseUtilisateur);
@@ -174,7 +180,7 @@ public class Adresse {
             adressesUtilisateurs.remove(adresseUtilisateur);
         }
     }
-
+*/
     @Override
     public String toString() {
         return "Adresse{" +

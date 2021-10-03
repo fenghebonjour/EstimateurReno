@@ -1,10 +1,13 @@
 package com.renovSolution.renov.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -78,6 +81,15 @@ public class AppelDOffre implements Serializable {
     )
     @JsonBackReference
  private Client client;
+
+    @OneToMany(
+            mappedBy = "appelDOffre",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference
+    private List<OffreService> offresService =new ArrayList<>();
 
     public AppelDOffre() {
     }
@@ -155,6 +167,14 @@ public class AppelDOffre implements Serializable {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public void addOffreService(OffreService offreService){
+        if(!offresService.contains(offreService))
+        {
+            offresService.add(offreService);
+            offreService.setAppelDOffre(this);
+        }
     }
 
   @Override
