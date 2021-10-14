@@ -1,5 +1,6 @@
 package com.renovSolution.renov.controlleur;
 
+import com.renovSolution.renov.model.Client;
 import com.renovSolution.renov.model.Utilisateur;
 import com.renovSolution.renov.service.UtilisateurService;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,8 @@ public  ResponseEntity<List<Utilisateur>> getAllUtilisateurs(){
         return new ResponseEntity<>(newUtilisateur,HttpStatus.CREATED);
 
 }
+
+
 
     @PostMapping("/update")
     public ResponseEntity<Utilisateur> updateUtilisateur(@RequestBody Utilisateur utilisateur){

@@ -1,5 +1,7 @@
 package com.renovSolution.renov.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -76,13 +78,15 @@ public class Utilisateur implements Serializable {
 
     private List<Adresse> adresses = new ArrayList<>();
     */
+
     @OneToMany(
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "utilisateur"
 
 
     )
-    @JsonManagedReference
+    @JsonManagedReference(value="utilisateur-adresseUtilisateur")
+   // @JsonIgnore
     protected List<AdresseUtilisateur> adressesUtilisateurs = new ArrayList<>();
 
 
