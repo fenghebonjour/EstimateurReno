@@ -22,7 +22,7 @@ public class OdsMainOeuvre {
                     name="ods_main_oeuvre_service_fk"
             )
     )
-    @JsonBackReference
+    @JsonBackReference(value="offreService-odsMainOeuvre")
 
     private OffreService offreService;
 

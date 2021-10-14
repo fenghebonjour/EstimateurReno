@@ -79,7 +79,7 @@ public class AppelDOffre implements Serializable {
             )
 
     )
-    @JsonBackReference
+    @JsonBackReference(value="client-appelOffre")
  private Client client;
 
     @OneToMany(
@@ -88,7 +88,7 @@ public class AppelDOffre implements Serializable {
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
             fetch = FetchType.LAZY
     )
-    @JsonManagedReference
+    @JsonManagedReference(value="appelOffre-offreService")
     private List<OffreService> offresService =new ArrayList<>();
 
     public AppelDOffre() {

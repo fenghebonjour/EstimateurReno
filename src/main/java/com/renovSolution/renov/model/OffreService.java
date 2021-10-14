@@ -69,7 +69,7 @@ public class OffreService {
             )
 
     )
-    @JsonBackReference
+    @JsonBackReference(value="appelOffre-offreService")
     private AppelDOffre appelDOffre;
 
 
@@ -83,7 +83,7 @@ public class OffreService {
             )
 
     )
-    @JsonBackReference
+    @JsonBackReference(value="offreService-contracteur")
     private Contracteur contracteur;
 
 
@@ -93,7 +93,7 @@ public class OffreService {
 
 
     )
-    @JsonManagedReference
+    @JsonManagedReference(value="offreService-odsMateriaux")
     // @JsonIgnore
     protected List<OdsMateriaux> odsMateriauxList = new ArrayList<>();
 
@@ -103,7 +103,7 @@ public class OffreService {
 
 
     )
-    @JsonManagedReference
+    @JsonManagedReference(value="offreService-odsMainOeuvre")
     // @JsonIgnore
     protected List<OdsMainOeuvre> odsMainOeuvreList = new ArrayList<>();
 

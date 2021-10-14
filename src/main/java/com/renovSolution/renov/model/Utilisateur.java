@@ -85,7 +85,7 @@ public class Utilisateur implements Serializable {
 
 
     )
-    @JsonManagedReference
+    @JsonManagedReference(value="utilisateur-adresseUtilisateur")
    // @JsonIgnore
     protected List<AdresseUtilisateur> adressesUtilisateurs = new ArrayList<>();
 

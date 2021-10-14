@@ -24,7 +24,7 @@ public class AdresseUtilisateur implements Serializable {
                     name="adresseUtilisateur_utilisateur_fk"
             )
     )
-    @JsonBackReference
+    @JsonBackReference(value="utilisateur-adresseUtilisateur")
     private Utilisateur utilisateur ;
 
     @ManyToOne

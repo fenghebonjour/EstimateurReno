@@ -52,7 +52,7 @@ public class Contracteur extends Utilisateur implements Serializable {
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
             fetch = FetchType.LAZY
     )
-    @JsonManagedReference
+    @JsonManagedReference(value="offreService-contracteur")
     private List<OffreService> offreServices =new ArrayList<>();
 
 

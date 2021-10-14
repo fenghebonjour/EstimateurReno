@@ -45,13 +45,22 @@ public class Client extends Utilisateur implements Serializable {
         cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
         fetch = FetchType.LAZY
 )
-@JsonManagedReference
+@JsonManagedReference(value="client-appelOffre")
     private List<AppelDOffre> appelDOffres =new ArrayList<>();
 
     public Client() {
     }
 
-    public Client(String username, String password, LocalDate dateInscription, String type, String nom, String prenom, String courriel, String telephone) {
+    public Client(
+                  String username,
+                  String password,
+                  LocalDate dateInscription,
+                  String type,
+                  String nom,
+                  String prenom,
+                  String courriel,
+                  String telephone
+               ) {
         super(username, password, dateInscription, type);
         this.nom = nom;
         this.prenom = prenom;
