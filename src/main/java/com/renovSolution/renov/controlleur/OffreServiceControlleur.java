@@ -43,4 +43,29 @@ public class OffreServiceControlleur {
     }
 
 
+    @PostMapping("/add")
+    public ResponseEntity<OffreService> addOffreService(@RequestBody OffreService offreService) {
+        OffreService newClient = offreServiceService.addOffreService(offreService);
+        return new ResponseEntity<>(newClient, HttpStatus.CREATED);
+
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<OffreService> updateClient(@RequestBody OffreService offreService){
+
+        OffreService updatedOffreService = offreServiceService.updateOffreService(offreService);
+        return new ResponseEntity<>(updatedOffreService,HttpStatus.OK);
+
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteClient(@PathVariable("id") Long id){
+        offreServiceService.deleteOffreService(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
+
+
 }

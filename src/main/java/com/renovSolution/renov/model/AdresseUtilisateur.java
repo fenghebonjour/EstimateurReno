@@ -57,6 +57,13 @@ public class AdresseUtilisateur implements Serializable {
         this.typeAdresse = typeAdresse;
     }
 
+    public AdresseUtilisateur( Utilisateur utilisateur, Adresse adresse,String typeAdresse) {
+
+        this.utilisateur = utilisateur;
+        this.adresse = adresse;
+        this.typeAdresse = typeAdresse;
+    }
+
     public String getTypeAdresse() {
         return typeAdresse;
     }

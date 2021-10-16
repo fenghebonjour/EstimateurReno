@@ -18,4 +18,5 @@ public interface OffreServiceRepo extends JpaRepository<OffreService,Long> {
 
     List<OffreService> findOffreServicesByAppelDOffreId(Long id);
 
+    void deleteOffreServiceById(Long id);
 }
