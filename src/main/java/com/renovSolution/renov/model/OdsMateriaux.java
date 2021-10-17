@@ -70,6 +70,13 @@ public class OdsMateriaux {
         this.prixUnitaire = prixUnitaire;
     }
 
+    public OdsMateriaux( OffreService offreService,Materiaux materiaux, int quantite, double prixUnitaire) {
+       this.offreService= offreService;
+        this.materiaux = materiaux;
+        this.quantite = quantite;
+        this.prixUnitaire = prixUnitaire;
+    }
+
     public OdsMateriauxId getId() {
         return id;
     }

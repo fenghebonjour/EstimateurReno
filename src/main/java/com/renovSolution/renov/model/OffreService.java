@@ -73,7 +73,7 @@ public class OffreService {
     private AppelDOffre appelDOffre;
 
 
-    @ManyToOne
+    @ManyToOne //(cascade = {CascadeType.ALL}) //  À SUPPRIMÉ********************
     @JoinColumn(
             name="utilisateur_id",
 

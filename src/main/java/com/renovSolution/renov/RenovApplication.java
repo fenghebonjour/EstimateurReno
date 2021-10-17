@@ -74,9 +74,9 @@ public class RenovApplication {
 					"client",
 					LocalDate.now(),
 					"client",
-					"Francois",
-					"Moffat",
-					"francois.moffat@itsolution.com",
+					"Mark",
+					"Mitterand",
+					"littirand.mark@itsolution.com",
 					"514 514 2222"
 			);
 

@@ -1,10 +1,7 @@
 package com.renovSolution.renov.controlleur;
 
 
-import com.renovSolution.renov.model.Client;
-import com.renovSolution.renov.model.Contracteur;
-import com.renovSolution.renov.model.OffreService;
-import com.renovSolution.renov.model.Utilisateur;
+import com.renovSolution.renov.model.*;
 import com.renovSolution.renov.repo.OffreServiceRepo;
 import com.renovSolution.renov.service.OffreServiceService;
 import org.springframework.http.HttpStatus;
@@ -63,6 +60,15 @@ public class OffreServiceControlleur {
     public ResponseEntity<?> deleteClient(@PathVariable("id") Long id){
         offreServiceService.deleteOffreService(id);
         return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
+
+    @PutMapping("/mat/{id}")
+    public ResponseEntity<OffreService> updateMatt(@RequestBody OdsMateriaux odsMateriaux,@PathVariable("id") Long id){
+
+        OffreService updatedOffreService = offreServiceService.addMteriaux(odsMateriaux,id);
+        return new ResponseEntity<>(updatedOffreService,HttpStatus.OK);
 
     }
 

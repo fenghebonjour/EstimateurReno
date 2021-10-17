@@ -1,5 +1,6 @@
 package com.renovSolution.renov.controlleur;
 
+import com.renovSolution.renov.model.AdresseUtilisateur;
 import com.renovSolution.renov.model.Client;
 import com.renovSolution.renov.model.Utilisateur;
 import com.renovSolution.renov.service.UtilisateurService;
@@ -56,6 +57,15 @@ public  ResponseEntity<List<Utilisateur>> getAllUtilisateurs(){
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
+
+/*
+    @PutMapping("/addAdresse/{id}")
+    public ResponseEntity<Utilisateur> addAdresseUtilisateur(@RequestBody AdresseUtilisateur adresseUtilisateur, @PathVariable("id") Long id) {
+        Utilisateur newUser =utilisateurService.addAddresseUtilisateur(adresseUtilisateur,id);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+
+    }
+*/
 
 
 }

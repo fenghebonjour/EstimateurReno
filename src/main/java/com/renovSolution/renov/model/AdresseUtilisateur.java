@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Table(name ="adresse_utilisateur")
 
 public class AdresseUtilisateur implements Serializable {
-    @JsonIgnore
+    //@JsonIgnore
     @EmbeddedId
     private AdresseUtilisateurId id;
 

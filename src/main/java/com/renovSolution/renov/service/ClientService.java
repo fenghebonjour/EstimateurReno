@@ -1,8 +1,7 @@
 package com.renovSolution.renov.service;
 
 import com.renovSolution.renov.exception.UserNotFoundException;
-import com.renovSolution.renov.model.Client;
-import com.renovSolution.renov.model.Utilisateur;
+import com.renovSolution.renov.model.*;
 import com.renovSolution.renov.repo.ClientRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +43,30 @@ public class ClientService {
 
         clientRepo.deleteClientById(id);
     }
+/*
+
+LocalDate dateDemande, LocalDate dateLimite, LocalDate dateDebutTraveaux,
+                       LocalDate dateFinTraveaux, String statut, String type
+
+ */
+
+    public Client addAppelOffreClient(AppelDOffre appelDOffre, Long id){
+        AppelDOffre ao = new AppelDOffre(
+                appelDOffre.getDateDemande(),
+                appelDOffre.getDateLimite(),
+                appelDOffre.getDateDebutTraveaux(),
+                appelDOffre.getDateFinTraveaux(),
+                appelDOffre.getStatut(),
+                appelDOffre.getType()
+        );  //LocalDate dateOffre, LocalDate dateValide, String statut, double montant
+        Client client = clientRepo.findById(id).orElseThrow(()-> new UserNotFoundException("Contracteur By ID"+ id +"not found"));
+
+
+      client.addAppelDOffre(ao);
+        return  clientRepo.save(client);
+
+    }
+
 
 
 }

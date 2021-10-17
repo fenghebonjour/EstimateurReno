@@ -42,7 +42,7 @@ public class Client extends Utilisateur implements Serializable {
 @OneToMany(
         mappedBy = "client",
         orphanRemoval = true,
-        cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
+        cascade = {CascadeType.ALL},
         fetch = FetchType.LAZY
 )
 @JsonManagedReference(value="client-appelOffre")

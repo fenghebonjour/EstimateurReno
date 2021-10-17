@@ -1,9 +1,8 @@
 package com.renovSolution.renov.controlleur;
 
 
-import com.renovSolution.renov.model.Client;
+import com.renovSolution.renov.model.*;
 
-import com.renovSolution.renov.model.Utilisateur;
 import com.renovSolution.renov.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -60,5 +59,15 @@ public class ClientControlleur {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
+
+    @PutMapping("/addAppelOffre/{id}")
+    public ResponseEntity<Client> updateClientAppelOffre(@RequestBody AppelDOffre appelDOffre,
+                                                         @PathVariable("id") Long id){
+
+        Client updatedClient = clientService.addAppelOffreClient(appelDOffre,id);
+        return new ResponseEntity<>(updatedClient,HttpStatus.OK);
+
+    }
+
 
 }

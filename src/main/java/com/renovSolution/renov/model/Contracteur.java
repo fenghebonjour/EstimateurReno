@@ -49,7 +49,7 @@ public class Contracteur extends Utilisateur implements Serializable {
     @OneToMany(
             mappedBy = "contracteur",
             orphanRemoval = true,
-            cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
+            cascade = {CascadeType.ALL},
             fetch = FetchType.LAZY
     )
     @JsonManagedReference(value="offreService-contracteur")
